@@ -1,5 +1,6 @@
 package model;
 
+import controller.MovedController;
 import view.ChessboardPoint;
 import controller.ClickController;
 
@@ -60,8 +61,8 @@ public class RookChessComponent extends ChessComponent {
         }
     }
 
-    public RookChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
-        super(chessboardPoint, location, color, listener, size);
+    public RookChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, MovedController movedController, int size) {
+        super(chessboardPoint, location, color, listener, movedController, size);
         initiateRookImage(color);
     }
 
@@ -113,5 +114,10 @@ public class RookChessComponent extends ChessComponent {
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }
+        if (isMovedIn()){
+            g.setColor(Color.CYAN);
+            g.drawOval(0,0,getWidth(),getHeight());
+        }
     }
+
 }

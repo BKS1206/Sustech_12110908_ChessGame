@@ -64,8 +64,6 @@ public class MainMenu extends JFrame{
         label.setBounds(0, 0, icon.getIconWidth(), icon.getIconHeight());//设置标签位置大小，记得大小要和窗口一样大
         this.getLayeredPane().add(label, Integer.valueOf(Integer.MIN_VALUE));//标签添加到层面板
 
-
-
         setTitle("Chess Game");
         WIDTH = width;HEIGHT=height;
         setSize(WIDTH, HEIGHT);

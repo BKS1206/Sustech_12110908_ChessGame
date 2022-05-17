@@ -1,6 +1,7 @@
 package model;
 
 import controller.ClickController;
+import controller.MovedController;
 import view.ChessboardPoint;
 
 import javax.imageio.ImageIO;
@@ -36,8 +37,8 @@ public class KingChessComponent extends ChessComponent{
         }
     }
 
-    public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, int size) {
-        super(chessboardPoint, location, color, listener, size);
+    public KingChessComponent(ChessboardPoint chessboardPoint, Point location, ChessColor color, ClickController listener, MovedController movedController, int size) {
+        super(chessboardPoint, location, color, listener, movedController, size);
         initiateKingImage(color);
     }
 
@@ -55,5 +56,10 @@ public class KingChessComponent extends ChessComponent{
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
         }
+        if (isMovedIn()){
+            g.setColor(Color.CYAN);
+            g.drawOval(0,0,getWidth(),getHeight());
+        }
     }
+
 }
