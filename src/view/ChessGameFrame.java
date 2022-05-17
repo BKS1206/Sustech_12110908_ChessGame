@@ -91,6 +91,7 @@ public class ChessGameFrame extends JFrame {
                 int width=getWidth();
                 int height=getHeight();
                 chessboard.setLocation(width/10,height/10);chessboard.setSize(width*4/5,height*4/5);
+
                 statusLabel.setLocation(width*3/4,height/10);statusLabel.setSize(width/5,height/12);
                 ResetButton.setLocation(width*3/4,height/10+120);ResetButton.setSize(width/5,height/12);
                 SaveButton.setLocation(width*3/4,height/10+240);SaveButton.setSize(width/5,height/12);
