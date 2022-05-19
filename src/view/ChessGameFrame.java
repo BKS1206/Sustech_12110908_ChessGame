@@ -1,8 +1,7 @@
 package view;
 
 import controller.GameController;
-import model.ChessColor;
-import model.ChessComponent;
+import model.*;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicTreeUI;
@@ -10,6 +9,10 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -65,9 +68,7 @@ public class ChessGameFrame extends JFrame {
         ResetButton.addActionListener(e -> {
             int index = JOptionPane.showConfirmDialog(null, "确认重新开始？", null, JOptionPane.YES_NO_OPTION);
             if (index == JOptionPane.YES_OPTION) {
-                this.dispose();
-                ChessGameFrame mainFrame = new ChessGameFrame(1000, 760);
-                mainFrame.setVisible(true);
+                chessboard.Reset();
             }
         });
 
@@ -76,6 +77,79 @@ public class ChessGameFrame extends JFrame {
         SaveButton.setSize(200, 60);
         SaveButton.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(SaveButton);
+        SaveButton.addActionListener(e -> {
+            String name = JOptionPane.showInputDialog(this,"Input name here:");
+            File file = new File("./Save/"+name+".txt");
+            if (file.exists()){
+                JOptionPane.showMessageDialog(this, "文件已存在！");
+            }else {
+                try {
+                    file.createNewFile();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            FileWriter fileWriter = null;
+            BufferedWriter bufferedWriter = null;
+            StringBuilder Chessboard = new StringBuilder();
+            for (int i=0; i<8; i++){
+                for (int j = 0; j<8; j++){
+                    if ((this.chessboard.getChess(i,j) instanceof RookChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("R");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof KnightChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("N");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof BishopChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("B");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof QueenChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("Q");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof KingChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("K");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof PawnChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.BLACK)){
+                        Chessboard.append("P");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof RookChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("r");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof KnightChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("n");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof BishopChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("b");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof QueenChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("q");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof KingChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("k");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof PawnChessComponent) && (this.chessboard.getChess(i,j).getChessColor()==ChessColor.WHITE)){
+                        Chessboard.append("p");
+                    }
+                    if ((this.chessboard.getChess(i,j) instanceof EmptySlotComponent)){
+                        Chessboard.append("_");
+                    }
+                }
+                Chessboard.append("\n");
+            }
+            if (chessboard.getCurrentColor()==ChessColor.BLACK){
+                Chessboard.append("b");
+            }else {
+                Chessboard.append("w");
+            }
+            try {
+                fileWriter = new FileWriter(file.getAbsoluteFile());
+                bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write(String.valueOf(Chessboard));
+                bufferedWriter.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
 
         JButton BackToMainMenu = new JButton("Back to menu");
         BackToMainMenu.setLocation(width * 3 / 4, HEIGHT / 10 + 360);
