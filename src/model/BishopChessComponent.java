@@ -44,8 +44,37 @@ public class BishopChessComponent extends ChessComponent{
     }
 
     @Override
-    public boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination) {
-        return true;
+    public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
+        ChessboardPoint source = getChessboardPoint();
+        if(Math.abs(source.getX() - destination.getX()) == Math.abs(source.getY() - destination.getY())){
+            if(source.getX() < destination.getX() && source.getY() < destination.getY()){
+                for(int i = 1;source.getX() + i < destination.getX();i++){
+                    if(chessComponents[source.getX() + i][source.getY() + i].chessColor != ChessColor.NONE){
+                        return false;
+                    }
+                }
+            }else if(source.getX() < destination.getX() && source.getY() > destination.getY()){
+                for(int i = 1;source.getX() + i < destination.getX();i++){
+                    if(chessComponents[source.getX() - i][source.getY() + i].chessColor != ChessColor.NONE){
+                        return false;
+                    }
+                }
+            }else if(source.getX() > destination.getX() && source.getY() > destination.getY()) {
+                for (int i = 1; source.getX() - i > destination.getX(); i++) {
+                    if (chessComponents[source.getX() - i][source.getY() - i].chessColor != ChessColor.NONE) {
+                        return false;
+                    }
+                }
+            }else if(source.getX() > destination.getX() && source.getY() < destination.getY()) {
+                for (int i = 1; source.getX() - i > destination.getX(); i++) {
+                    if (chessComponents[source.getX() - i][source.getY() + i].chessColor != ChessColor.NONE) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
