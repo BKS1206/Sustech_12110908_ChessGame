@@ -1,5 +1,6 @@
 package controller;
 
+import view.ChessGameFrame;
 import view.Chessboard;
 
 import java.io.IOException;
@@ -8,8 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+
 public class GameController {
-    private Chessboard chessboard;
+    public static Chessboard chessboard;
+
 
     public GameController(Chessboard chessboard) {
         this.chessboard = chessboard;

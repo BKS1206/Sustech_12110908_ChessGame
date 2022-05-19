@@ -2,7 +2,21 @@ package controller;
 
 
 import model.ChessComponent;
+import view.ChessGameFrame;
 import view.Chessboard;
+
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.*;
+
+import java.applet.Applet;
+import java.applet.AudioClip;
+import java.awt.desktop.AppForegroundListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
 
 public class ClickController {
     private final Chessboard chessboard;
@@ -11,6 +25,8 @@ public class ClickController {
     public ClickController(Chessboard chessboard) {
         this.chessboard = chessboard;
     }
+
+
 
     public void onClick(ChessComponent chessComponent) {
         if (first == null) {
@@ -26,6 +42,14 @@ public class ClickController {
                 first = null;
                 recordFirst.repaint();
             } else if (handleSecond(chessComponent)) {
+                try {
+                    URL url = new URL("file:./images/effect.wav");
+                    AudioClip ac = Applet.newAudioClip(url);
+                    ac.play();
+                }catch (Exception e){
+                    System.out.println(e);
+                }
+
                 //repaint in swap chess method.
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();

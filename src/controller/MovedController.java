@@ -8,14 +8,8 @@ public class MovedController {
     private ChessComponent chessComponent;
     public MovedController(Chessboard chessboard){this.chessboard = chessboard;}
     public void moved(ChessComponent chessComponent, boolean in){
-        if (in) {
-            chessComponent.setMoved(true);
-            this.chessComponent = chessComponent;
-            this.chessComponent.repaint();
-        }else {
-            chessComponent.setMoved(false);
-            this.chessComponent = chessComponent;
-            this.chessComponent.repaint();
-        }
+        chessComponent.setMoved(in);
+        this.chessComponent = chessComponent;
+        this.chessComponent.repaint();
     }
 }

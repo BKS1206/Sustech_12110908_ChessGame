@@ -4,6 +4,7 @@ import controller.MovedController;
 import view.ChessboardPoint;
 import controller.ClickController;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -104,6 +105,7 @@ public abstract class ChessComponent extends JComponent {
         if (e.getID() == MouseEvent.MOUSE_PRESSED) {
             System.out.printf("Click [%d,%d]\n", chessboardPoint.getX(), chessboardPoint.getY());
             clickController.onClick(this);
+
         }
         if (e.getID() == MouseEvent.MOUSE_ENTERED){
             movedController.moved(this,true);

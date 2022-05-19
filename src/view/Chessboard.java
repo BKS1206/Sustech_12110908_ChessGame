@@ -1,10 +1,11 @@
 package view;
 
 
+import controller.GameController;
 import controller.MovedController;
 import model.*;
 import controller.ClickController;
-
+import view.ChessGameFrame;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
@@ -27,7 +28,7 @@ public class Chessboard extends JComponent {
     private static final int CHESSBOARD_SIZE = 8;
 
     private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
-    private ChessColor currentColor = ChessColor.BLACK;
+    private ChessColor currentColor = ChessColor.WHITE;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final MovedController movedController = new MovedController(this);
@@ -66,8 +67,6 @@ public class Chessboard extends JComponent {
             initPawnOnBoard(CHESSBOARD_SIZE-2, i, ChessColor.WHITE);
         }
     }
-
-
 
     public ChessComponent[][] getChessComponents() {
         return chessComponents;
@@ -112,6 +111,11 @@ public class Chessboard extends JComponent {
 
     public void swapColor() {
         currentColor = currentColor == ChessColor.BLACK ? ChessColor.WHITE : ChessColor.BLACK;
+        if (currentColor == ChessColor.BLACK) {
+            ChessGameFrame.currentPlayer.setText("Black");
+        }else {
+            ChessGameFrame.currentPlayer.setText("White");
+        }
     }
 
     private void initRookOnBoard(int row, int col, ChessColor color) {
@@ -161,6 +165,56 @@ public class Chessboard extends JComponent {
     }
 
     public void loadGame(List<String> chessData) {
+        for (int i = 0; i<8; i++){
+            for (int j = 0; j<8; j++){
+                if (chessData.get(i).charAt(j) == 'R'){
+                    initRookOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'r'){
+                    initRookOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == 'N'){
+                    initKnightOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'n'){
+                    initKnightOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == 'B'){
+                    initBishopOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'b'){
+                    initBishopOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == 'K'){
+                    initKingOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'k'){
+                    initKingOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == 'Q'){
+                    initQueenOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'q'){
+                    initQueenOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == 'P'){
+                    initPawnOnBoard(i,j,ChessColor.BLACK);
+                }
+                if (chessData.get(i).charAt(j) == 'p'){
+                    initPawnOnBoard(i,j,ChessColor.WHITE);
+                }
+                if (chessData.get(i).charAt(j) == '_'){
+                    putChessOnBoard(new EmptySlotComponent(new ChessboardPoint(i, j), calculatePoint(i, j), clickController, movedController, CHESS_SIZE));
+                }
+            }
+        }
+        if (chessData.get(8).charAt(0) == 'w'){
+            this.currentColor = ChessColor.WHITE;
+            ChessGameFrame.currentPlayer.setText("White");
+        }else {
+            this.currentColor = ChessColor.BLACK;
+            ChessGameFrame.currentPlayer.setText("Black");
+        }
         chessData.forEach(System.out::println);
     }
 }
