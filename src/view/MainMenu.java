@@ -89,11 +89,11 @@ public class MainMenu extends JFrame{
         Load.setLocation(width*3/10,height*2/5);Load.setSize(width*4/10,height/8);
         Load.setFont(new Font("Rockwell",Font.BOLD,35));
         add(Load);
-        Load.addActionListener(e -> {
-            System.out.println("Click load");
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
-            gameController.loadGameFromFile(path);
-        });
+//        Load.addActionListener(e -> {
+//            System.out.println("Click load");
+//            String path = JOptionPane.showInputDialog(this,"Input Path here");
+//            gameController.loadGameFromFile(path);
+//        });
 
 
         JButton ChangeImage = new JButton("Change background");
