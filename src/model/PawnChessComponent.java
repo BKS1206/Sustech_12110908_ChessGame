@@ -43,8 +43,49 @@ public class PawnChessComponent extends ChessComponent{
     }
 
     @Override
-    public boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination) {
-        return true;
+    public boolean canMoveTo(ChessComponent[][] chessComponents, ChessboardPoint destination) {
+        ChessboardPoint source = getChessboardPoint();
+        if(getChessColor() == ChessColor.BLACK){
+                if(source.getX() == 1){
+                    if(source.getY() == destination.getY() && destination.getX() - source.getX() == 1
+                            && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE){
+                        return true;
+                    }else if(source.getY() == destination.getY() && destination.getX() - source.getX() == 2
+                            && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE
+                            && chessComponents[destination.getX() - 1][destination.getY()].chessColor == ChessColor.NONE){
+                        return true;
+                    }
+                }else  if(source.getY() == destination.getY() && destination.getX() - source.getX() == 1
+                        && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE){
+                        return true;
+                }
+                if(source.getX() + 1 == destination.getX() && source.getY() + 1 == destination.getY()
+                        && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.WHITE){
+                    return true;
+                }
+            return source.getX() + 1 == destination.getX() && source.getY() - 1 == destination.getY()
+                    && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.WHITE;
+            }else {
+            if(source.getX() == 6){
+                if(source.getY() == destination.getY() && destination.getX() - source.getX() == -1
+                        && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE){
+                    return true;
+                }else if(source.getY() == destination.getY() && destination.getX() - source.getX() == -2
+                        && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE
+                        && chessComponents[destination.getX() + 1][destination.getY()].chessColor == ChessColor.NONE){
+                    return true;
+                }
+            }else  if(source.getY() == destination.getY() && destination.getX() - source.getX() == -1
+                    && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.NONE){
+                return true;
+            }
+            if(source.getX() - 1 == destination.getX() && source.getY() - 1 == destination.getY()
+                    && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.BLACK){
+                return true;
+            }
+            return source.getX() - 1 == destination.getX() && source.getY() + 1 == destination.getY()
+                    && chessComponents[destination.getX()][destination.getY()].chessColor == ChessColor.BLACK;
+        }
     }
 
     @Override

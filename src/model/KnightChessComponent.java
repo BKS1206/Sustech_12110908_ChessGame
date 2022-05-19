@@ -45,7 +45,11 @@ public class KnightChessComponent extends ChessComponent{
 
     @Override
     public boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination) {
-        return true;
+        ChessboardPoint source = getChessboardPoint();
+        if(Math.abs(source.getX() - destination.getX()) == 1 && Math.abs(source.getY() - destination.getY()) == 2){
+            return true;
+        }
+        return Math.abs(source.getX() - destination.getX()) == 2 && Math.abs(source.getY() - destination.getY()) == 1;
     }
 
     @Override

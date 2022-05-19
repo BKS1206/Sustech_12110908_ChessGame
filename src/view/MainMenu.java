@@ -11,11 +11,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-
-import view.ChessGameFrame;
 
 
 public class MainMenu extends JFrame{
@@ -94,20 +89,11 @@ public class MainMenu extends JFrame{
         Load.setLocation(width*3/10,height*2/5);Load.setSize(width*4/10,height/8);
         Load.setFont(new Font("Rockwell",Font.BOLD,35));
         add(Load);
-        Load.addActionListener(e -> {
-            System.out.println("Click load");
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
-            try {
-                List<String> chessData = Files.readAllLines(Path.of(path));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            //*shoud design：存档非法输入*//
-
-//            ChessGameFrame mainFrame = new ChessGameFrame(1000,760);
-//            mainFrame.setVisible(true);
-//            ChessGameFrame.gameController.loadGameFromFile(path);
-        });
+       Load.addActionListener(e -> {
+           System.out.println("Click load");
+           String path = JOptionPane.showInputDialog(this,"Input Path here");
+           gameController.loadGameFromFile(path);
+       });
 
 
         JButton ChangeImage = new JButton("Change background");

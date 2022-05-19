@@ -44,7 +44,8 @@ public class KingChessComponent extends ChessComponent{
 
     @Override
     public boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination) {
-        return true;
+        ChessboardPoint source = getChessboardPoint();
+        return Math.abs(source.getX() - destination.getX()) <= 1 && Math.abs(source.getY() - destination.getY()) <= 1;
     }
 
     protected void paintComponent(Graphics g) {
