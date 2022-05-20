@@ -5,6 +5,7 @@ import controller.GameController;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Locale;
 
 import view.ChessGameFrame;
 
@@ -98,7 +100,29 @@ public class MainMenu extends JFrame{
         Load.addActionListener(e -> {
             System.out.println("Click load");
             boolean legal = true;
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
+            JFileChooser fileChooser = new JFileChooser("./Save/");
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.showOpenDialog(null);
+            fileChooser.setFileFilter(new FileFilter() {
+                @Override
+                public boolean accept(File f) {
+                    if (f.getName().toLowerCase().endsWith(".txt")){
+                        return true;
+                    }else {
+                        return false;
+                    }
+                }
+
+                @Override
+                public String getDescription() {
+                    return "txt文件(*.txt)";
+                }
+            });
+            File f = fileChooser.getSelectedFile();
+            if (f==null){
+                JOptionPane.showMessageDialog(this,"文件格式错误！\n错误编码：104");
+            }
+            String path = f.getPath();
             String FileType = path.substring(path.lastIndexOf('.')+1);
             if ((!FileType.equals("txt")) && (!FileType.equals("TXT"))){
                 JOptionPane.showMessageDialog(this, "文件格式错误！\n错误编码：104");
@@ -106,7 +130,7 @@ public class MainMenu extends JFrame{
             }
             if (legal) {
                 try {
-                    List<String> chessData = Files.readAllLines(Path.of(path));
+                    List<String> chessData = Files.readAllLines(f.toPath());
                     if (chessData.size() != 9) {
                         if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
                             JOptionPane.showMessageDialog(this, "缺少行棋方！");

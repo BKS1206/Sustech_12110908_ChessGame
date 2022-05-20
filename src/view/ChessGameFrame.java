@@ -13,6 +13,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -82,7 +83,7 @@ public class ChessGameFrame extends JFrame {
             File file = new File("./Save/"+name+".txt");
             if (file.exists()){
                 JOptionPane.showMessageDialog(this, "文件已存在！");
-            }else {
+            }else if (!name.equals("")){
                 try {
                     file.createNewFile();
                 } catch (IOException ex) {
