@@ -27,18 +27,18 @@ public class Chessboard extends JComponent {
      */
     private static final int CHESSBOARD_SIZE = 8;
 
-    private final ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
+    private ChessComponent[][] chessComponents = new ChessComponent[CHESSBOARD_SIZE][CHESSBOARD_SIZE];
     private ChessColor currentColor = ChessColor.WHITE;
     //all chessComponents in this chessboard are shared only one model controller
     private final ClickController clickController = new ClickController(this);
     private final MovedController movedController = new MovedController(this);
-    private final int CHESS_SIZE;
+    private int CHESS_SIZE;
 
 
     public Chessboard(int width, int height) {
         setLayout(null); // Use absolute layout.
         setSize(width, height);
-        CHESS_SIZE = width / 8;
+        CHESS_SIZE = getWidth() / 8;
         System.out.printf("chessboard size = %d, chess size = %d\n", width, CHESS_SIZE);
 
         initiateEmptyChessboard();
@@ -65,6 +65,17 @@ public class Chessboard extends JComponent {
         }
         for (int i = 0; i<CHESSBOARD_SIZE; i++){
             initPawnOnBoard(CHESSBOARD_SIZE-2, i, ChessColor.WHITE);
+        }
+    }
+
+    public void changeChessSize(){
+        CHESS_SIZE = getWidth()/8;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessComponent chessComponent = chessComponents[i][j];
+                chessComponent.setLocation(j * CHESS_SIZE, i * CHESS_SIZE);
+                chessComponent.setSize(CHESS_SIZE, CHESS_SIZE);
+            }
         }
     }
 

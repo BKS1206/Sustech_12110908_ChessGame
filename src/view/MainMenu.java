@@ -101,48 +101,50 @@ public class MainMenu extends JFrame{
             String path = JOptionPane.showInputDialog(this,"Input Path here");
             String FileType = path.substring(path.lastIndexOf('.')+1);
             if ((!FileType.equals("txt")) && (!FileType.equals("TXT"))){
-                JOptionPane.showMessageDialog(this, "文件格式错误！");
+                JOptionPane.showMessageDialog(this, "文件格式错误！\n错误编码：104");
                 legal = false;
             }
-            try {
-                List<String> chessData = Files.readAllLines(Path.of(path));
-                if (chessData.size() != 9){
-                    if (!chessData.get(chessData.size()-1).equals("w") && !chessData.get(chessData.size()-1).equals("b")){
-                        JOptionPane.showMessageDialog(this, "缺少行棋方！");
-                    }else {
-                        JOptionPane.showMessageDialog(this,"棋盘并非8*8！");
-                    }
-                    legal = false;
-                }else {
-                    if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
-                        JOptionPane.showMessageDialog(this, "缺少行棋方！");
+            if (legal) {
+                try {
+                    List<String> chessData = Files.readAllLines(Path.of(path));
+                    if (chessData.size() != 9) {
+                        if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
+                            JOptionPane.showMessageDialog(this, "缺少行棋方！");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "棋盘并非8*8\n错误编码：101");
+                        }
                         legal = false;
                     } else {
-                        for (int i=0; i<8; i++) {
-                            if (chessData.get(i).length() != 8){
-                                JOptionPane.showMessageDialog(this, "棋盘并非8*8！");
-                                legal = false;
-                                break;
+                        if (!chessData.get(chessData.size() - 1).equals("w") && !chessData.get(chessData.size() - 1).equals("b")) {
+                            JOptionPane.showMessageDialog(this, "缺少行棋方！\n错误编码：103");
+                            legal = false;
+                        } else {
+                            for (int i = 0; i < 8; i++) {
+                                if (chessData.get(i).length() != 8) {
+                                    JOptionPane.showMessageDialog(this, "棋盘并非8*8！\n错误编码：101");
+                                    legal = false;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                if (legal) {
-                    for (int i=0; i<8; i++) {
-                        for (int j = 0; j < chessData.get(i).length(); j++) {
-                            String s = String.valueOf(chessData.get(i).charAt(j));
-                            if ((!s.equals("R")) && (!s.equals("N")) && (!s.equals("B")) && (!s.equals("Q")) && (!s.equals("K")) && (!s.equals("P")) && (!s.equals("r")) && (!s.equals("n")) && (!s.equals("b")) && (!s.equals("q")) && (!s.equals("k")) && (!s.equals("p")) && (!s.equals("_"))) {
-                                JOptionPane.showMessageDialog(this, "存在非法棋子！");
-                                legal = false;
-                                break;
+                    if (legal) {
+                        for (int i = 0; i < 8; i++) {
+                            for (int j = 0; j < chessData.get(i).length(); j++) {
+                                String s = String.valueOf(chessData.get(i).charAt(j));
+                                if ((!s.equals("R")) && (!s.equals("N")) && (!s.equals("B")) && (!s.equals("Q")) && (!s.equals("K")) && (!s.equals("P")) && (!s.equals("r")) && (!s.equals("n")) && (!s.equals("b")) && (!s.equals("q")) && (!s.equals("k")) && (!s.equals("p")) && (!s.equals("_"))) {
+                                    JOptionPane.showMessageDialog(this, "存在非法棋子！\n错误编码：102");
+                                    legal = false;
+                                    break;
+                                }
                             }
                         }
                     }
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    legal = false;
+                    JOptionPane.showMessageDialog(this, "未找到文件！");
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                legal = false;
-                JOptionPane.showMessageDialog(this,"未找到文件！");
             }
 
             if (legal) {

@@ -169,17 +169,26 @@ public class ChessGameFrame extends JFrame {
                 int width = getWidth();
                 int height = getHeight();
                 chessboard.setLocation(width / 10, height / 10);
-                chessboard.setSize(width * 4 / 5, height * 4 / 5);
+//                System.out.println(chessboard.getWidth());
+                chessboard.setSize(width * 3 / 5, height * 4   / 5);
+//                System.out.println(chessboard.getWidth());
+                chessboard.changeChessSize();
+//                chessboard.repaint();
                 statusLabel.setLocation(width * 3 / 4, height / 10);
                 statusLabel.setSize(width / 5, height / 12);
+                statusLabel.setFont(new Font("Rockwell",Font.BOLD,getWidth()/50));
                 ResetButton.setLocation(width * 3 / 4, height / 10 + 120);
                 ResetButton.setSize(width / 5, height / 12);
+                ResetButton.setFont(new Font("Rockwell",Font.BOLD,getWidth()/50));
                 SaveButton.setLocation(width * 3 / 4, height / 10 + 240);
                 SaveButton.setSize(width / 5, height / 12);
+                SaveButton.setFont(new Font("Rockwell",Font.BOLD,getWidth()/50));
                 BackToMainMenu.setLocation(width * 3 / 4, height / 10 + 360);
                 BackToMainMenu.setSize(width / 5, height / 12);
+                BackToMainMenu.setFont(new Font("Rockwell",Font.BOLD,getWidth()/50));
                 currentPlayer.setLocation(width * 3 / 4, height / 7);
                 currentPlayer.setSize(width / 5, height / 12);
+                currentPlayer.setFont(new Font("Rockwell",Font.BOLD,getWidth()/50));
             }
         });
     }

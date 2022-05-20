@@ -29,8 +29,8 @@ public class EmptySlotComponent extends ChessComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         if (isMovedIn()){
-            g.setColor(Color.CYAN);
-            g.drawOval(0,0,getWidth(),getHeight());
+            g.setColor(Color.cyan);
+            g.fillRect(0,0,getWidth(),getHeight());
         }
     }
 
