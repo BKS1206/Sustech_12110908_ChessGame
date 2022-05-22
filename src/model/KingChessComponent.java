@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class KingChessComponent extends ChessComponent{
     private static Image KING_WHITE;
@@ -46,6 +48,19 @@ public class KingChessComponent extends ChessComponent{
     public boolean canMoveTo(ChessComponent[][] chessboard, ChessboardPoint destination) {
         ChessboardPoint source = getChessboardPoint();
         return Math.abs(source.getX() - destination.getX()) <= 1 && Math.abs(source.getY() - destination.getY()) <= 1;
+    }
+    @Override
+    public List<ChessboardPoint> getCanMovePoints(ChessComponent[][] chessComponents) {
+        List<ChessboardPoint> r = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessboardPoint c = chessComponents[i][j].getChessboardPoint();
+                if(canMoveTo(chessComponents,c) && getChessColor() != chessComponents[i][j].chessColor){
+                    r.add(chessComponents[i][j].getChessboardPoint());
+                }
+            }
+        }
+        return r;
     }
 
     protected void paintComponent(Graphics g) {

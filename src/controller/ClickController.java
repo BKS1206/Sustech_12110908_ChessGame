@@ -21,6 +21,7 @@ import java.net.URL;
 public class ClickController {
     private final Chessboard chessboard;
     private ChessComponent first;
+    public ChessComponent temp;
 
     public ClickController(Chessboard chessboard) {
         this.chessboard = chessboard;
@@ -74,7 +75,11 @@ public class ClickController {
      */
 
     private boolean handleSecond(ChessComponent chessComponent) {
-        return chessComponent.getChessColor() != chessboard.getCurrentColor() &&
-                first.canMoveTo(chessboard.getChessComponents(), chessComponent.getChessboardPoint());
+        if(chessComponent.getChessColor() != chessboard.getCurrentColor()
+                && first.canMoveTo(chessboard.getChessComponents(), chessComponent.getChessboardPoint())){
+            temp = first;
+            return true;
+        }
+        return false;
     }
 }

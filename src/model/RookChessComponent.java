@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 这个类表示国际象棋里面的车
@@ -119,6 +121,18 @@ public class RookChessComponent extends ChessComponent {
             g.drawOval(0, 0, getWidth() , getHeight());
         }
 
+    }
+    public List<ChessboardPoint> getCanMovePoints(ChessComponent[][] chessComponent){
+        List<ChessboardPoint> r = new ArrayList<>();
+        for (int i = 0;i < 8;i++){
+            for(int j = 0;j < 8;j++){
+                ChessboardPoint n = chessComponent[i][j].getChessboardPoint();
+                if(canMoveTo(chessComponent,n) && getChessColor() != chessComponent[i][j].chessColor){
+                    r.add(chessComponent[i][j].getChessboardPoint());
+                }
+            }
+        }
+        return r;
     }
 
 }

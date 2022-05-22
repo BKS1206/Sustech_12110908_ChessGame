@@ -6,6 +6,7 @@ import controller.ClickController;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 这个类表示棋盘上的空位置
@@ -33,5 +34,8 @@ public class EmptySlotComponent extends ChessComponent {
             g.fillRect(0,0,getWidth(),getHeight());
         }
     }
-
+    @Override
+    public List<ChessboardPoint> getCanMovePoints(ChessComponent[][] chessComponent){
+        return null;
+    }
 }
