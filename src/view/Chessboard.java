@@ -132,7 +132,7 @@ public class Chessboard extends JComponent {
                 }
             }
         }
-        return "noWinner";
+        return "no winner";
     }
 
     public String checkMate(ChessComponent[][] chessComponents,ChessComponent temp){
@@ -152,9 +152,13 @@ public class Chessboard extends JComponent {
                     }
                 }
             }
-            List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
-            if(b.contains(kingPoints)){
+            if(king == null){
                 return "Black win!";
+            }else {
+                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
+                if(b.contains(kingPoints)) {
+                    return "Black win!";
+                }
             }
         }else if(temp.getChessColor() == ChessColor.WHITE){
             List<ChessboardPoint> w = new ArrayList<>();
@@ -172,9 +176,13 @@ public class Chessboard extends JComponent {
                     }
                 }
             }
-            List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
-            if(w.contains(kingPoints)){
+            if(king == null){
                 return "White win!";
+            }else {
+                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
+                if (w.contains(kingPoints)) {
+                    return "White win!";
+                }
             }
         }
         return "no winner";
