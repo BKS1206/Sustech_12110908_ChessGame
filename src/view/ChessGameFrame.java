@@ -194,6 +194,8 @@ public class ChessGameFrame extends JFrame {
         });
     }
 
+    public Chessboard getChessboard(){return chessboard;}
+
 
 
 

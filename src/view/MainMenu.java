@@ -90,6 +90,7 @@ public class MainMenu extends JFrame{
         add(Start);
         Start.addActionListener(e -> {
             ChessGameFrame mainFrame1 = new ChessGameFrame(1000, 760);
+            mainFrame1.getChessboard().Reset();
             mainFrame1.setVisible(true);
         });
 
