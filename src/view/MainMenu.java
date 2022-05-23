@@ -103,25 +103,25 @@ public class MainMenu extends JFrame{
             JFileChooser fileChooser = new JFileChooser("./Save/");
             fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             fileChooser.showOpenDialog(null);
-            fileChooser.setFileFilter(new FileFilter() {
-                @Override
-                public boolean accept(File f) {
-                    if (f.getName().toLowerCase().endsWith(".txt")){
-                        return true;
-                    }else {
-                        return false;
-                    }
-                }
-
-                @Override
-                public String getDescription() {
-                    return "txt文件(*.txt)";
-                }
-            });
+//            fileChooser.setFileFilter(new FileFilter() {
+//                @Override
+//                public boolean accept(File f) {
+//                    if (f.getName().toLowerCase().endsWith(".txt")){
+//                        return true;
+//                    }else {
+//                        return false;
+//                    }
+//                }
+//
+//                @Override
+//                public String getDescription() {
+//                    return "txt文件(*.txt)";
+//                }
+//            });
             File f = fileChooser.getSelectedFile();
-            if (f==null){
-                JOptionPane.showMessageDialog(this,"文件格式错误！\n错误编码：104");
-            }
+//            if (f==null){
+//                JOptionPane.showMessageDialog(this,"文件格式错误！\n错误编码：104");
+//            }
             String path = f.getPath();
             String FileType = path.substring(path.lastIndexOf('.')+1);
             if ((!FileType.equals("txt")) && (!FileType.equals("TXT"))){
