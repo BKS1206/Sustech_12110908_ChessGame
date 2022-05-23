@@ -81,7 +81,7 @@ public class MainMenu extends JFrame{
 
         JLabel Welcome = new JLabel("Welcome to chess game!",JLabel.CENTER);
         Welcome.setLocation(width/5,height/15); Welcome.setSize(width*3/5,height/5);
-        Welcome.setFont(new Font("Rockwell", Font.BOLD, 51));
+        Welcome.setFont(new Font("Rockwell", Font.BOLD, 41));
         add(Welcome);
 
         JButton Start = new JButton("New Game");

@@ -75,7 +75,7 @@ public class QueenChessComponent extends ChessComponent{
                 }
             }else if(source.getX() < destination.getX() && source.getY() > destination.getY()){
                 for(int i = 1;source.getX() + i < destination.getX();i++){
-                    if(chessComponents[source.getX() - i][source.getY() + i].chessColor != ChessColor.NONE){
+                    if(chessComponents[source.getX() + i][source.getY() - i].chessColor != ChessColor.NONE){
                         return false;
                     }
                 }

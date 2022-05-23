@@ -1,7 +1,9 @@
 package controller;
 
 
+import model.ChessColor;
 import model.ChessComponent;
+import model.KingChessComponent;
 import view.ChessGameFrame;
 import view.Chessboard;
 
@@ -55,7 +57,16 @@ public class ClickController {
                 chessboard.swapChessComponents(first, chessComponent);
                 chessboard.swapColor();
                 first.setSelected(false);
+                if (chessComponent instanceof KingChessComponent && chessComponent.getChessColor()== ChessColor.BLACK){
+                    JOptionPane.showMessageDialog(chessboard, "White win!");
+                }
+                if (chessComponent instanceof KingChessComponent && chessComponent.getChessColor()== ChessColor.WHITE){
+                    JOptionPane.showMessageDialog(chessboard, "Black win!");
+                }
+                chessboard.check(chessboard.getChessComponents(),first);
+//                chessboard.checkMate(chessboard.getChessComponents(), first);
                 first = null;
+
             }
         }
     }

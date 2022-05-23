@@ -116,77 +116,75 @@ public class Chessboard extends JComponent {
         return chessComponents[canMovePoint.getX()][canMovePoint.getY()] instanceof KingChessComponent
                 && chessComponents[canMovePoint.getX()][canMovePoint.getY()].getChessColor() == ChessColor.WHITE;
     }
-    public String check(ChessComponent[][] chessComponents,ChessComponent temp){
+    public void check(ChessComponent[][] chessComponents,ChessComponent temp){
         if(temp.getChessColor() == ChessColor.BLACK){
             List<ChessboardPoint> a = temp.getCanMovePoints(chessComponents);
             for (ChessboardPoint chessboardPoint : a) {
                 if (getWhiteKing(chessComponents, chessboardPoint)) {
-                    return "Black will win";
+                    JOptionPane.showMessageDialog(getParent(),"Black will win!");
                 }
             }
         }else if(temp.getChessColor() == ChessColor.WHITE){
             List<ChessboardPoint> a = temp.getCanMovePoints(chessComponents);
             for (ChessboardPoint chessboardPoint : a) {
                 if (getBlackKing(chessComponents, chessboardPoint)) {
-                    return "White will win";
+                    JOptionPane.showMessageDialog(getParent(),"White will win!");
                 }
             }
         }
-        return "no winner";
     }
 
-    public String checkMate(ChessComponent[][] chessComponents,ChessComponent temp){
-        if(temp.getChessColor() == ChessColor.BLACK){
-            List<ChessboardPoint> b = new ArrayList<>();
-            ChessComponent king = null;
-            for(int i = 0;i < 8;i++){
-                for(int j = 0;j < 8;j++){
-                    if(chessComponents[i][j].getChessColor() == ChessColor.BLACK){
-                        Set<ChessboardPoint> B = new HashSet<>(b);
-                        B.addAll(chessComponents[i][j].getCanMovePoints(chessComponents));
-                        b = new ArrayList<>(B);
-                    }
-                    if(chessComponents[i][j].getChessColor() == ChessColor.WHITE
-                            && chessComponents[i][j] instanceof KingChessComponent){
-                        king = chessComponents[i][j];
-                    }
-                }
-            }
-            if(king == null){
-                return "Black win!";
-            }else {
-                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
-                if(b.contains(kingPoints)) {
-                    return "Black win!";
-                }
-            }
-        }else if(temp.getChessColor() == ChessColor.WHITE){
-            List<ChessboardPoint> w = new ArrayList<>();
-            ChessComponent king = null;
-            for(int i = 0;i < 8;i++){
-                for(int j = 0;j < 8;j++){
-                    if(chessComponents[i][j].getChessColor() == ChessColor.WHITE){
-                        Set<ChessboardPoint> B = new HashSet<>(w);
-                        B.addAll(chessComponents[i][j].getCanMovePoints(chessComponents));
-                        w = new ArrayList<>(B);
-                    }
-                    if(chessComponents[i][j].getChessColor() == ChessColor.BLACK
-                            && chessComponents[i][j] instanceof KingChessComponent){
-                        king = chessComponents[i][j];
-                    }
-                }
-            }
-            if(king == null){
-                return "White win!";
-            }else {
-                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
-                if (w.contains(kingPoints)) {
-                    return "White win!";
-                }
-            }
-        }
-        return "no winner";
-    }
+//    public void checkMate(ChessComponent[][] chessComponents,ChessComponent temp){
+//        if(temp.getChessColor() == ChessColor.BLACK){
+//            List<ChessboardPoint> b = new ArrayList<>();
+//            ChessComponent king = null;
+//            for(int i = 0;i < 8;i++){
+//                for(int j = 0;j < 8;j++){
+//                    if(chessComponents[i][j].getChessColor() == ChessColor.BLACK){
+//                        Set<ChessboardPoint> B = new HashSet<>(b);
+//                        B.addAll(chessComponents[i][j].getCanMovePoints(chessComponents));
+//                        b = new ArrayList<>(B);
+//                    }
+//                    if(chessComponents[i][j].getChessColor() == ChessColor.WHITE
+//                            && chessComponents[i][j] instanceof KingChessComponent){
+//                        king = chessComponents[i][j];
+//                    }
+//                }
+//            }
+//            if(king == null){
+//                JOptionPane.showMessageDialog(getParent(), "White win!");
+//            }else {
+//                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
+//                if(b.contains(kingPoints)) {
+//                    JOptionPane.showMessageDialog(getParent(), "Black win!");
+//                }
+//            }
+//        }else if(temp.getChessColor() == ChessColor.WHITE){
+//            List<ChessboardPoint> w = new ArrayList<>();
+//            ChessComponent king = null;
+//            for(int i = 0;i < 8;i++){
+//                for(int j = 0;j < 8;j++){
+//                    if(chessComponents[i][j].getChessColor() == ChessColor.WHITE){
+//                        Set<ChessboardPoint> B = new HashSet<>(w);
+//                        B.addAll(chessComponents[i][j].getCanMovePoints(chessComponents));
+//                        w = new ArrayList<>(B);
+//                    }
+//                    if(chessComponents[i][j].getChessColor() == ChessColor.BLACK
+//                            && chessComponents[i][j] instanceof KingChessComponent){
+//                        king = chessComponents[i][j];
+//                    }
+//                }
+//            }
+//            if(king == null){
+//                JOptionPane.showMessageDialog(getParent(), "White win!");
+//            }else {
+//                List<ChessboardPoint> kingPoints = new ArrayList<>(king.getCanMovePoints(chessComponents));
+//                if (w.contains(kingPoints)) {
+//                    JOptionPane.showMessageDialog(getParent(), "White win!");
+//                }
+//            }
+//        }
+//    }
 
     public boolean getBlackKing(ChessComponent[][] chessComponents,ChessboardPoint canMovePoint){
         return chessComponents[canMovePoint.getX()][canMovePoint.getY()] instanceof KingChessComponent
